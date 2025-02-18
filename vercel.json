@@ -5,7 +5,7 @@
     "framework": "nextjs",
     "functions": {
       "backend/app/main.py": {
-        "runtime": "python3.13",
+        "runtime": "python3.12",
         "memory": 1024,
         "maxDuration": 10
       }
