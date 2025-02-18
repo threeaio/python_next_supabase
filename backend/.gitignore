@@ -1,0 +1,10 @@
+__pycache__/
+.python-version
+.pytest_cache
+.env
+
+venv/
+.pip-cache/
+coverage.xml
+.coverage
+*.pyc
