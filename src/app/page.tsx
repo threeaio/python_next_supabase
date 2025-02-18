@@ -1,9 +1,9 @@
 
 import { api } from '@/utils/api-client'
-import { Doc } from '@/api' // Your generated types
+import { Doc } from '@/backend-api' // Your generated types
 
 async function getData(): Promise<Doc[]> {
-  return api.get('/docs')
+  return  api.get('/data')
 }
 
 export default async function Home() {

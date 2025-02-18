@@ -17,7 +17,7 @@ async function fetchWithAuth(
   options: RequestInit = {}
 ): Promise<Response> {
   const authHeader = await getAuthHeader()
-  const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL
+  const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL + '/api'
 
   const defaultOptions: RequestInit = {
     headers: {
@@ -27,6 +27,7 @@ async function fetchWithAuth(
     }
   }
 
+  console.log('requesting ', `${baseUrl}${url}`);
   const response = await fetch(`${baseUrl}${url}`, {
     ...defaultOptions,
     ...options,
@@ -35,6 +36,8 @@ async function fetchWithAuth(
       ...(options.headers || {})
     }
   })
+
+  console.log('response ', response);
 
   if (!response.ok) {
     throw new ApiError(response.status, `API Error: ${response.statusText}`)

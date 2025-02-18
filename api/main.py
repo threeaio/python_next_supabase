@@ -1,15 +1,34 @@
-import sys
-from pathlib import Path
+from fastapi import FastAPI, HTTPException, Depends
+from fastapi.middleware.cors import CORSMiddleware
+from api.persistence.database import get_db
+from api.models import Doc
+from api.auth import get_current_user
 
-# Add backend directory to Python path
-backend_path = str(Path(__file__).parent.parent / "backend")
-if backend_path not in sys.path:
-    sys.path.append(backend_path)
+app = FastAPI()
 
-# Import the actual application
-from app.main import app
+# Security headers middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Replace with your frontend domain in production
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
-# This is required for Vercel - do not remove
-from fastapi import FastAPI
+# Initialize supabase client
+supabase = get_db()
 
-app = app
+
+@app.get("/api/data")
+def get_docs(user: dict = Depends(get_current_user)) -> list[Doc]:
+    try:
+        response = supabase.table("docs").select("*").execute()
+        return response.data
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+if __name__ == "__main__":
+    import uvicorn
+
+    uvicorn.run("app.main:app", host="127.0.0.1", port=8000, reload=True)

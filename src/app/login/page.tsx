@@ -1,6 +1,15 @@
 import { login } from './actions'
+import { createClient } from '@/utils/supabase/server'
+import { redirect } from 'next/navigation'
+export default async function LoginPage() {
 
-export default function LoginPage() {
+  const supabase = await createClient()
+
+  const { data: { user } } = await supabase.auth.getUser()
+  if (user) {
+    redirect('/')
+  }
+
   return (
     <div className="min-h-screen flex items-center justify-center">
       <form className="bg-black border border-white/20 p-8 rounded-lg w-full max-w-sm space-y-6">
