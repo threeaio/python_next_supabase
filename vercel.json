@@ -1,0 +1,27 @@
+{
+    "version": 2,
+    "buildCommand": "cd frontend && yarn install && yarn build && cd ../backend && pip install -r requirements.txt",
+    "outputDirectory": "frontend/.next",
+    "framework": "nextjs",
+    "functions": {
+      "backend/app/main.py": {
+        "runtime": "python3.13",
+        "memory": 1024,
+        "maxDuration": 10
+      }
+    },
+    "rewrites": [
+      {
+        "source": "/api/(.*)",
+        "destination": "/backend/app/main.py"
+      },
+      {
+        "source": "/(.*)",
+        "destination": "/"
+      }
+    ],
+    "env": {
+      "SUPABASE_URL": "@supabase_url",
+      "SUPABASE_KEY": "@supabase_key"
+    }
+  }
