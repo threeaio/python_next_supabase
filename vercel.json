@@ -10,15 +10,23 @@
       }
     },
     "rewrites": [
-      {
-        "source": "/api/(.*)",
-        "destination": "/api/main.py"
-      },
-      {
-        "source": "/(.*)",
-        "destination": "/"
-      }
-    ],
+        {
+          "source": "/api/(.*)",
+          "destination": "/api/main.py"
+        },
+        {
+          "source": "/docs",
+          "destination": "/api/main.py"
+        },
+        {
+          "source": "/openapi.json",
+          "destination": "/api/main.py"
+        },
+        {
+          "source": "/(.*)",
+          "destination": "/"
+        }
+      ],
     "env": {
      
     }
