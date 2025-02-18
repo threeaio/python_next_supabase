@@ -1,6 +1,6 @@
 {
     "version": 2,
-    "buildCommand": "cd frontend && yarn install && yarn build && cd ../backend && pip install -r requirements.txt",
+    "buildCommand": "cd frontend && pnpm install && pnpm build && cd ../backend && pip install -r requirements.txt",
     "outputDirectory": "frontend/.next",
     "framework": "nextjs",
     "functions": {
@@ -23,5 +23,6 @@
     ],
     "env": {
      
-    }
+    },
+    "root": "frontend"
   }
