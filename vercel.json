@@ -4,16 +4,17 @@
     "outputDirectory": "frontend/.next",
     "framework": "nextjs",
     "functions": {
-      "backend/app/main.py": {
+      "api/main.py": {
         "runtime": "@vercel/python@4.7.1",
         "memory": 1024,
-        "maxDuration": 10
+        "maxDuration": 10,
+        "includeFiles": "backend/**"
       }
     },
     "rewrites": [
       {
         "source": "/api/(.*)",
-        "destination": "/backend/app/main.py"
+        "destination": "/api/main.py"
       },
       {
         "source": "/(.*)",
