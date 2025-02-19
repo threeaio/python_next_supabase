@@ -21,3 +21,10 @@ async def get_current_user(
             detail="Invalid authentication credentials",
             headers={"WWW-Authenticate": "Bearer"},
         )
+
+
+async def add_current_user_to_supabase(
+    supabase: Client,
+    credentials: HTTPAuthorizationCredentials = Depends(security),
+):
+    supabase.auth.set_session(credentials.credentials, "")

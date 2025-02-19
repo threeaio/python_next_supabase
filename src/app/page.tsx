@@ -1,13 +1,10 @@
-
 import { Suspense } from 'react';
-import { api } from '@/utils/api-client'
 import { Doc } from '@/api' 
-
-async function getData(): Promise<Doc[]> {
-  return  api.get('/data')
-}
-
+import { getData, createDoc } from '@/app/page.actions'
+import {CreateDocForm} from '@/components/create-form'
 export default async function Home() {
+  
+  
   const docs = await getData();
 
   return (
@@ -21,7 +18,11 @@ export default async function Home() {
             ))}
           </ol>
         </Suspense>
+        <CreateDocForm />
       </main>
     </div>
   );
 }
+
+
+

@@ -12,4 +12,5 @@ def get_db() -> Client:
     if not url or not key:
         raise ValueError("SUPABASE_URL and SUPABASE_KEY must be set")
     supabase: Client = create_client(url, key)
+    
     return supabase

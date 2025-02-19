@@ -10,3 +10,6 @@ export interface Doc {
   title: string;
   created_at: string;
 }
+export interface DocCreate {
+  title: string;
+}

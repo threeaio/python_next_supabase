@@ -1,8 +1,10 @@
 from fastapi import FastAPI, HTTPException, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from api.persistence.database import get_db
-from api.models import Doc
-from api.auth import get_current_user
+from api.models import Doc, DocCreate
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
+
+security = HTTPBearer()
 
 app = FastAPI()
 
@@ -20,15 +22,28 @@ supabase = get_db()
 
 
 @app.get("/api/data")
-def get_docs(user: dict = Depends(get_current_user)) -> list[Doc]:
+def get_docs(
+    credentials: HTTPAuthorizationCredentials = Depends(security),
+) -> list[Doc]:
     try:
+        supabase.auth.set_session(credentials.credentials, "")
         response = supabase.table("docs").select("*").execute()
         return response.data
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
 
-if __name__ == "__main__":
-    import uvicorn
-
-    uvicorn.run("app.main:app", host="127.0.0.1", port=8000, reload=True)
+@app.post("/api/data", response_model=Doc)
+def create_doc(
+    doc: DocCreate,
+    credentials: HTTPAuthorizationCredentials = Depends(security),
+) -> Doc:
+    try:
+        supabase.auth.set_session(credentials.credentials, "")
+        response = supabase.table("docs").insert({"title": doc.title}).execute()
+        print("response", response.data[0])
+        return response.data[0]
+    except Exception as e:
+        print("Error details:", str(e))  # Log the full error
+        print("Error type:", type(e).__name__)
+        raise HTTPException(status_code=500, detail=str(e))
