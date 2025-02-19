@@ -9,4 +9,4 @@ pydantic2ts \
   --output src/backend-api/index.ts \
   --json2ts-cmd "npx --prefix frontend json2ts"
 
-echo "TypeScript definitions generated at src/backend-api/index.ts"
+echo "TypeScript definitions generated at src/api/index.ts"

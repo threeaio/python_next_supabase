@@ -25,8 +25,9 @@ export default async function LoginPage() {
             id="email" 
             name="email" 
             type="email" 
+            placeholder="email@example.com"
             required
-            className="w-full px-3 py-2 bg-black border border-white/20 rounded-md text-white font-[family-name:var(--font-geist-sans)] focus:outline-none focus:border-white"
+            className="w-full px-3 py-2 placeholder:text-white/30 bg-black border border-white/20 rounded-md text-white font-[family-name:var(--font-geist-sans)] focus:outline-none focus:border-white"
           />
         </div>
 
@@ -38,8 +39,9 @@ export default async function LoginPage() {
             id="password" 
             name="password" 
             type="password" 
+            placeholder="Your password"
             required
-            className="w-full px-3 py-2 bg-black border border-white/20 rounded-md text-white font-[family-name:var(--font-geist-sans)] focus:outline-none focus:border-white"
+            className="w-full px-3 placeholder:text-white/30 py-2 bg-black border border-white/20 rounded-md text-white font-[family-name:var(--font-geist-sans)] focus:outline-none focus:border-white"
           />
         </div>
 
