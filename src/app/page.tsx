@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 import { Doc } from '@/api' 
-import { getData, createDoc } from '@/app/page.actions'
+import { getData } from '@/app/page.actions'
 import {CreateDocForm} from '@/components/create-form'
 export default async function Home() {
   

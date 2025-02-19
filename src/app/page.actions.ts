@@ -8,7 +8,11 @@ export async function getData(): Promise<Doc[]> {
     return api.get('/data')
 }
 
-export async function createDoc(_prevState: any, formData: FormData) {
+export interface CreateDocState {
+    message: string
+}
+
+export async function createDoc(_prevState: CreateDocState, formData: FormData) {
     const title = formData.get("title") as string
     await api.post('/data', { title })
     revalidatePath('/data');

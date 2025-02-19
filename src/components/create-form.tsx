@@ -1,15 +1,15 @@
 "use client"
 
-import { createDoc } from "@/app/page.actions";
+import { createDoc, CreateDocState } from "@/app/page.actions";
 import { useActionState } from "react";
 
-const initialState = {
+const initialState: CreateDocState = {
     message: '',
   }
   
   export function CreateDocForm() {
   
-    const [state, formAction, pending] = useActionState(createDoc, initialState)
+    const [_state, formAction, pending] = useActionState(createDoc, initialState)
   
     return (
       <form action={formAction} className="flex flex-col gap-2">
